@@ -1,0 +1,252 @@
+@use './colors' as *;
+@use './media' as *;
+
+@mixin desktop {
+	@media (min-width: 992px) {
+		@content;
+	}
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	min-height: 100vh;
+	min-height: 100vsh;
+	background-color: $color-light-grayish-cyan;
+	font-family: 'Space Mono', monospace;
+	font-weight: 700;
+
+	@include mobile {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+}
+
+header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 50px 0 40px;
+
+	@include desktop {
+		margin-top: 0px;
+	}
+}
+
+main {
+	background-color: $color-white;
+	border-radius: 15px;
+	padding: 35px;
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+
+	@include mobile {
+		width: 550px;
+	}
+
+	@include desktop {
+		flex-direction: row;
+		width: auto;
+		padding: 50px;
+		gap: 50px;
+	}
+}
+
+.calculator {
+
+	@include desktop {
+		width: 370px;
+	}
+
+	&__bill {
+		position: relative;
+	}
+
+	&__tip {
+		margin: 35px 0;
+		&-text {
+			color: $color-dark-grayish-cyan;
+			margin-bottom: 12px;
+		}
+
+		.tip-percent {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 18px;
+
+			@include desktop {
+				grid-template-columns: 1fr 1fr 1fr;
+			}
+		}
+
+		&-btn {
+			padding: 10px;
+			border: none;
+			border-radius: 8px;
+			background-color: $color-very-dark-cyan;
+			color: $color-white;
+			font-size: 24px;
+			font-weight: 700;
+			cursor: pointer;
+			transition: color 0.3s, background-color 0.3s;
+		}
+
+		&-btn:hover {
+			background-color: $color-light-grayish-cyan;
+			color: $color-very-dark-cyan;
+		}
+
+		.active {
+			background-color: $color-strong-cyan;
+			color: $color-very-dark-cyan;
+		}
+
+	}
+
+
+	&__people {
+		position: relative;
+
+		.label-box {
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+
+	.label {
+		color: $color-dark-grayish-cyan;
+		margin-bottom: 8px;
+		display: block;
+	}
+
+	.input {
+		display: block;
+		width: 100%;
+		background-color: $color-very-light-grayish-cyan;
+		border: 1px solid transparent;
+		border-radius: 8px;
+		font-size: 24px;
+		font-weight: 700;
+		text-align: right;
+		padding: 10px;
+		color: $color-very-dark-cyan;
+	}
+
+	.input:focus, .input:active {
+		outline-color: $color-strong-cyan;
+	}
+
+	.error, .error:focus, .error:active {
+		color: $color-error;
+		border-color: $color-error;
+		outline-color: $color-error;
+	}
+
+
+	.custom {
+		border: none;
+	}
+
+	.icon {
+		position: absolute;
+		bottom: 12px;
+		left: 10px;
+		height: 24px;
+	}
+}
+
+.amount {
+	background-color: $color-very-dark-cyan;
+	border-radius: 15px;
+	padding: 25px;
+
+	@include desktop {
+		width: 400px;
+		padding: 40px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	&__box {
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+	}
+
+	&__tip, &__total {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__tip--left, &__total--left {
+		.text-amount {
+			color: $color-white;
+			font-size: 14px;
+		}
+
+		.text-person {
+			color: $color-grayish-cyan;
+			font-size: 12px;
+		}
+	}
+
+	&__tip--right, &__total--right {
+		.value {
+			color: $color-strong-cyan;
+			font-size: 24px;
+
+			@include desktop {
+				font-size: 32px;
+			}
+		}
+	}
+
+	.reset {
+		width: 100%;
+		border: none;
+		border-radius: 8px;
+		color: $color-very-dark-cyan;
+		background-color: $color-strong-cyan;
+		font-weight: 700;
+		font-size: 16px;
+		margin-top: 35px;
+		padding: 20px;
+		cursor: pointer;
+		transition: background-color 0.3s;
+	}
+
+	.prevent {
+		cursor:not-allowed;
+		background-color: $color-dark-grayish-cyan;
+	}
+
+	.reset:hover {
+		background-color: $color-light-grayish-cyan;
+	}
+}
+
+.attribution {
+	font-size: 11px;
+	text-align: center;
+}
+
+.attribution a {
+	color: $color-atribution;
+	transition: color 0.3s;
+	text-decoration: none;
+}
+
+.attribution a:hover {
+	color: $color-strong-cyan;
+}
